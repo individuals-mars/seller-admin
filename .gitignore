@@ -1,0 +1,38 @@
+# Ignore node modules (for Node.js projects)
+node_modules/
+
+# Ignore environment variable files
+.env
+.env.local
+
+# Ignore build outputs
+dist/
+build/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore log files
+*.log
+
+# Ignore IDE settings
+.vscode/
+.idea/
+
+# Ignore OS generated files
+*.swp
+*.swo
+
+# Ignore coverage reports
+coverage/
+
+# Ignore dependency directories
+bower_components/
+
+# Ignore compiled source files
+*.class
+*.o
+*.out
+*.pyc
+__pycache__/
