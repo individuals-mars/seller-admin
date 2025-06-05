@@ -8,20 +8,16 @@ import { useDispatch } from 'react-redux';
 import { setTheme } from '../store/themeSlice';
 
 
-
-
 const Navbar = () => {
     const [allTheme, setAllTheme] = useState(true)
     const dispatch = useDispatch()
 
 
     const themeHandler = (e) => {
-        setAllTheme(prev => prev === true ? false : true)
-        console.log("input value",e.target.value)
-        console.log("theme: ", allTheme);
-        dispatch(setTheme(allTheme))
-    }
-
+    const newTheme = !allTheme; 
+    setAllTheme(newTheme); 
+    dispatch(setTheme(newTheme)); 
+}
 
     return (
         <ContainerTemplate>
