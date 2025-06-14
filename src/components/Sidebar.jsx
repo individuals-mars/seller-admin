@@ -28,9 +28,18 @@ const Sidebar = () => {
             label: "Orders"
         },
         {
-         path: "/createshop",
-         icon: <FaCartShopping />,
-         label: "Create Shops"
+            label: "Shops",
+            icon: <FaCartShopping />,
+            children: [
+                {
+                    path: "/allshops",
+                    label: "All Shops",
+                },
+                {
+                    path: "/createshop",
+                    label: "Create Shops / My Shops"
+                },
+            ]
         },
         {
             label: "Products",
@@ -53,7 +62,7 @@ const Sidebar = () => {
                 }
             ]
         },
-         {
+        {
             path: "/reviews",
             icon: <FaRegEnvelopeOpen />,
             label: "Reviews"
@@ -126,7 +135,7 @@ const Sidebar = () => {
                     </Link>
                     <p className='text-primary text-sm'>{Name} Dashboard</p>
                 </div>
-                <ul className="menu overflow-y-auto text-base-content mt-5 max-h-[50%] rounded-[40px] gap-1 relative flex flex-col w-full h-auto flex-grow transition-all py-6 px-7">
+                <ul className="menu overflow-y-auto text-base-content mt-5 max-h-[50%] rounded-[40px] gap-1 relative flex flex-col w-full h-auto flex-grow transition-all py-6 px-6">
                     {renderMenuItems(menuItems)}
                 </ul>
             </div>

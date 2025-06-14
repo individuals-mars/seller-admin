@@ -14,21 +14,23 @@ function App() {
   }, [theme])
 
   return (
-    
+
     <>
-    <main className='flex'>
-      <aside className='w-2/12 relative '>
-        <Sidebar />
-      </aside>
-      <section className='flex flex-1 min-h-[200vh]'>
-        <div className='bg-base-200 w-full flex flex-col justify-start justify-items-start gap-5 '>
-          <Navbar />
-          <Outlet />
-        </div>
-      </section>
-    </main>
+      <main className='flex'>
+        <aside className='w-2/12 relative '>
+          <Sidebar />
+        </aside>
+        <section className='flex flex-col  flex-1'>
+          <div className='bg-base-200 w-full flex flex-col flex-1 justify-start justify-items-start gap-5 '>
+            <Navbar />
+          </div>
+          <div className=' w-full flex flex-col flex-1 justify-start justify-items-start gap-5'>
+            <Outlet />
+          </div>
+        </section>
+      </main>
     </>
-   
+
   )
 }
 

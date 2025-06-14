@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { SiGooglemaps } from 'react-icons/si';
 import { MdOutlineLocalPhone } from 'react-icons/md';
-import { FiPlus } from 'react-icons/fi';
+import { FaTrash } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-const CreateShops = () => {
+const AllShops = () => {
     const [shops, setShops] = useState([]);
     const [fetchLoading, setFetchLoading] = useState(false);
     const token = useSelector((state) => state.user.token);
@@ -23,7 +23,7 @@ const CreateShops = () => {
 
             setFetchLoading(true);
             try {
-                const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/shops/myshops`, {
+                const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/shops`, {
                     headers: {
                         'Content-Type': 'application/json',
                         Authorization: `Bearer ${token}`,
@@ -31,12 +31,16 @@ const CreateShops = () => {
                 });
 
                 if (!response.ok) {
-                    const text = await response.text();
-                    if (text.startsWith('<!DOCTYPE')) {
-                        throw new Error('Received HTML instead of JSON. Check if /api/shop/myshops endpoint exists.');
-                    }
-                    const errorData = await response.json();
-                    throw new Error(errorData.message || 'Failed to fetch shops');
+                    let errorMessage = 'Failed to fetch shops';
+                    try {
+                        const text = await response.text();
+                        if (text.startsWith('<!DOCTYPE')) {
+                            throw new Error('Received HTML instead of JSON. Check if /api/shops endpoint exists.');
+                        }
+                        const errorData = JSON.parse(text);
+                        errorMessage = errorData.message || errorMessage;
+                    } catch (_) { }
+                    throw new Error(errorMessage);
                 }
 
                 const data = await response.json();
@@ -65,33 +69,17 @@ const CreateShops = () => {
         }
     };
 
-    const handleNavigateToCreate = () => {
-        if (!token) {
-            toast.error('Please log in to create a shop');
-            return;
-        }
-        navigate('/modalcreateshops');
-    };
 
     return (
         <div className="p-6">
             <div className="flex justify-between mb-3">
-                <h1 className="font-semibold text-2xl mb-4">Create Shops /  My Shops</h1>
-                <button
-                    className="p-3 btn btn-success rounded-lg text-base-100 flex"
-                    onClick={handleNavigateToCreate}
-                    aria-label="Create new shop"
-                    disabled={!token}
-                    aria-disabled={!token}
-                >
-                    <FiPlus className="mr-1 my-1" /> Create Shop
-                </button>
+                <h1 className="font-semibold text-2xl mb-4">All Shops</h1>
             </div>
             <hr className="mb-6 border-base-300" />
 
             {fetchLoading ? (
                 <div className="flex flex-wrap gap-6">
-                    {[...Array(5)].map((_, i) => (
+                    {[...Array(3)].map((_, i) => (
                         <div key={i} className="skeleton h-[260px] w-[390px] mt-3"></div>
                     ))}
                 </div>
@@ -102,7 +90,7 @@ const CreateShops = () => {
                     {shops.map((shop, index) => (
                         <div
                             key={shop._id || index}
-                            className="card bg-base-100 shadow-xl w-[390px] h-[260px] cursor-pointer hover:shadow-2xl transition-shadow"
+                            className="card bg-base-100 shadow-xl w-[390px] h-[260px] cursor-pointer hover:shadow-2xl transition-shadow relative"
                             onClick={() => handleShopClick(shop._id)}
                         >
                             <div className="card-body flex flex-row items-center gap-4">
@@ -114,7 +102,7 @@ const CreateShops = () => {
                                 <div>
                                     <h2 className="card-title text-lg">{shop.shopname}</h2>
                                     <p className="text-sm text-gray-500 flex mt-2">
-                                        <SiGooglemaps className=" mt-1 mr-2" />
+                                        <SiGooglemaps className="mr-1 mt-2" />
                                         {shop.address || 'Tashkent, Uzbekistan'}
                                     </p>
                                     <p className="text-sm text-gray-500 flex mt-2">
@@ -129,17 +117,17 @@ const CreateShops = () => {
                                     <p className="font-bold text-base-350">{shop.commission || '10%'}</p>
                                     <p className="text-xs text-base-350">Commission</p>
                                 </div>
-                                <p className="text-gray-500">|</p>
+                                <p className="text-base-300">|</p>
                                 <div>
                                     <p className="font-bold text-base-350">{shop.sales || '0'}</p>
                                     <p className="text-xs text-base-350">Sales</p>
                                 </div>
-                                <p className="text-gray-500">|</p>
+                                <p className="text-base-300">|</p>
                                 <div>
                                     <p className="font-bold text-base-350">{shop.balance || '0'}</p>
                                     <p className="text-xs text-base-350">Balance</p>
                                 </div>
-                                <p className="text-gray-500">|</p>
+                                <p className="text-base-300">|</p>
                                 <div>
                                     <p className="font-bold text-base-350">{shop.withdraw || '0'}</p>
                                     <p className="text-xs text-base-350">Withdraw</p>
@@ -153,4 +141,4 @@ const CreateShops = () => {
     );
 };
 
-export default CreateShops;
+export default AllShops;

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -23,6 +24,37 @@ import Reviews from "./pages/Reviews.jsx";
 import CreateShops from "./pages/CreateShops.jsx";
 import ShopDetail from "./pages/ShopDetail.jsx";
 import CreateProduct from "./pages/CreateProduct.jsx";
+=======
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import './index.css'
+import App from './App.jsx'
+import Login from './pages/Login.jsx';
+import NotFound from './pages/NotFound.jsx';
+import Orders from './pages/Orders.jsx';
+import Products from './pages/Products.jsx';
+import Profile from './pages/Profile.jsx';
+import Register from './pages/Register.jsx';
+import Dashboard from './pages/Dashboard.jsx';
+import { store, persistor } from './store/index.js';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import ProtectedRoute from './guard/ProtectedRoute.jsx';
+import { ToastContainer } from 'react-toastify';
+import AllProduct from './pages/AllProduct.jsx';
+import DrafProduct from './pages/DrafProduct.jsx';
+import LowProducts from './pages/LowProducts.jsx';
+import Analytics from './pages/Analytics.jsx';
+import Reviews from './pages/Reviews.jsx';
+import CreateShops from './pages/CreateShops.jsx';
+import ShopDetail from './pages/ShopDetail.jsx';
+import ModalCreateShops from './pages/ModalCreateShops.jsx';
+import AllShops from './pages/AllShops.jsx';
+>>>>>>> 4875e774bae6520841df83ed63124477cd7d2cf3
 
 const router = createBrowserRouter([
   {
@@ -33,6 +65,7 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     ),
     children: [
+<<<<<<< HEAD
       { path: "/dashboard", element: <Dashboard /> },
       { path: "/404", element: <NotFound /> },
       { path: "/orders", element: <Orders /> },
@@ -47,6 +80,23 @@ const router = createBrowserRouter([
       { path: "/createshop", element: <CreateShops /> },
       { path: "/shopdetail/:id", element: <ShopDetail /> },
     ],
+=======
+      { path: '/dashboard', element: <Dashboard /> },
+      { path: '/404', element: <NotFound /> },
+      { path: '/orders', element: <Orders /> },
+      { path: '/products', element: <Products /> },
+      { path: '/profile', element: <Profile /> },
+      { path: '/allproduct', element: <AllProduct /> },
+      { path: '/drafproduct', element: <DrafProduct /> },
+      { path: '/lowproduct', element: <LowProducts /> },
+      { path: '/analytics', element: <Analytics /> },
+      { path: '/reviews', element: <Reviews /> },
+      { path: '/createshop', element: <CreateShops /> },
+      { path: '/shopdetail/:id', element: <ShopDetail /> },
+      { path: '/modalcreateshops', element: <ModalCreateShops /> },
+      { path: '/allshops', element: <AllShops /> },
+      ]
+>>>>>>> 4875e774bae6520841df83ed63124477cd7d2cf3
   },
   {
     path: "/login",
