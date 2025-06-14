@@ -24,7 +24,7 @@ const Orders = () => {
   const [sortOrderByAge, setSortOrderByAge] = useState('asc');
   const [sortOrderByGender, setSortOrderByGender] = useState('asc');
   const [lastSortedAge, setLastSortedAge] = useState(null);
-  
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -32,7 +32,7 @@ const Orders = () => {
     setLoading(true);
     try {
       const response = await fetch(apiUrl);
-      const data = await response.json();      
+      const data = await response.json();
       const fetchedOrders = data.data || data || [];
       setOrdersLocal(fetchedOrders);
       setFilteredOrders(fetchedOrders);
@@ -146,18 +146,18 @@ const Orders = () => {
                   </button>
                 </li>
                 <li><button onClick={handleSortByStatus}> <MdWorkHistory className='text-warning' />
-                Sort by Status</button></li>
-                <li><button onClick={handleSortByGender}> <BsAwardFill className='text-info'/>
-                Sort by Gender</button></li>
+                  Sort by Status</button></li>
+                <li><button onClick={handleSortByGender}> <BsAwardFill className='text-info' />
+                  Sort by Gender</button></li>
               </ul>
             </div>
           </div>
         </div>
 
-        <div className='mt-8 border-2 border-base-300 rounded-2xl bg-base-100'>
-          <div className="overflow-x-auto">
+        <div className='mt-8 border-2 border-base-300 rounded-2xl bg-base-100 h-110'>
+          <div>
             <table className="table">
-              <thead className='bg-base-200 '>
+              <thead className='bg-base-200'>
                 <tr>
                   <th>#</th>
                   <th>Name</th>
@@ -177,7 +177,7 @@ const Orders = () => {
                 ) : filteredOrders.length === 0 ? (
                   <tr>
                     <td colSpan="10" className="text-center">
-                      <div className='flex items-center justify-center flex-col '>
+                      <div className='flex items-center justify-center flex-col mt-20'>
                         <img src={`/notfound.png`} alt="Not Found" className="w-40" />
                         <p className=' text-2xl'>No data found</p>
                         <p className='text-xs'>Sorry we couldn’t find any data</p>
@@ -216,6 +216,7 @@ const Orders = () => {
             </table>
           </div>
         </div>
+
       </div>
     </ContainerTemplate>
   );
