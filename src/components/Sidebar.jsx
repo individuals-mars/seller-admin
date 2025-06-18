@@ -33,12 +33,12 @@ const Sidebar = () => {
             children: [
                 {
                     path: "/allshops",
-                    label: "All Shops",
+                    label: "My Shops",
                 },
                 {
-                    path: "/createshop",
-                    label: "Create Shops / My Shops"
-                },
+                    path: "/modalcreateshops",
+                    label: "Modal Create Shops"
+                }
             ]
         },
         {

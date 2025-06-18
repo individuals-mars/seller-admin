@@ -23,7 +23,6 @@ import DrafProduct from './pages/DrafProduct.jsx';
 import LowProducts from './pages/LowProducts.jsx';
 import Analytics from './pages/Analytics.jsx';
 import Reviews from './pages/Reviews.jsx';
-import CreateShops from './pages/CreateShops.jsx';
 import ShopDetail from './pages/ShopDetail.jsx';
 import ModalCreateShops from './pages/ModalCreateShops.jsx';
 import AllShops from './pages/AllShops.jsx';
@@ -45,7 +44,6 @@ const router = createBrowserRouter([
       { path: '/lowproduct', element: <LowProducts /> },
       { path: '/analytics', element: <Analytics /> },
       { path: '/reviews', element: <Reviews /> },
-      { path: '/createshop', element: <CreateShops /> },
       { path: '/shopdetail/:id', element: <ShopDetail /> },
       { path: '/modalcreateshops', element: <ModalCreateShops /> },
       { path: '/allshops', element: <AllShops /> },

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { MdArrowBack, MdDelete, MdEdit } from 'react-icons/md';
 import { useSelector } from 'react-redux';
+import { GiReceiveMoney } from 'react-icons/gi';
 
 const ShopsDetail = () => {
     const { id } = useParams();
@@ -198,7 +199,7 @@ const ShopsDetail = () => {
 
             toast.success('Shop deleted successfully');
             setShowDeleteModal(false);
-            navigate('/shops'); // Changed to navigate to /shops instead of /createshops
+            navigate('/allshops'); // Changed to navigate to /shops instead of /createshops
         } catch (err) {
             console.error('Delete Error:', err);
             toast.error(err.message || 'Failed to delete shop');
@@ -276,10 +277,6 @@ const ShopsDetail = () => {
                                 <p className="text-base-350 dark:text-gray-300 mt-1">{shop.address}</p>
                             </div>
                             <div className="text-sm mt-2">
-                                <strong className="text-base-350 dark:text-gray-200 font-medium">Phone:</strong>
-                                <p className="text-base-350 dark:text-gray-300 mt-1">{shop.phone || '+998901234567'}</p>
-                            </div>
-                            <div className="text-sm mt-2">
                                 <strong className="text-base-350 dark:text-gray-200 font-medium">Location:</strong>
                                 <p className="text-base-350 dark:text-gray-300 mt-1">
                                     {shop.location ? `${shop.location.lat}, ${shop.location.lon}` : '41.321412, 69.2797'}
@@ -291,8 +288,11 @@ const ShopsDetail = () => {
                             </div>
                             <div className="text-sm mt-2">
                                 <strong className="text-base-350 dark:text-gray-200 font-medium">Tariff Plan:</strong>
-                                <p className="text-base-350 dark:text-gray-300 mt-1 capitalize">{shop.TariffPlan || 'basic'}</p>
+                                <p className={`text-sm flex mt-1 bg-transparent rounded px-1 ${shop.TariffPlan === 'premium' ? 'bg-gradient-to-r from-blue-600 to-orange-900' : shop.TariffPlan === 'standard' ? 'bg-gradient-to-r from-sky-950 to-cyan-400' : 'bg-gradient-to-tr from-orange-300 to-blue-900'} bg-clip-text text-transparent`}>
+                                    {shop.TariffPlan || 'basic'}
+                                </p>
                             </div>
+                          
                         </div>
                     </div>
                 </div>
@@ -377,20 +377,7 @@ const ShopsDetail = () => {
                                     />
                                     {errors.address && <p className="text-error text-xs mt-1">{errors.address}</p>}
                                 </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-base-350 dark:text-gray-200 mb-1" htmlFor="edit-phone">
-                                        Phone
-                                    </label>
-                                    <input
-                                        id="edit-phone"
-                                        type="text"
-                                        className={`input input-bordered w-full text-sm ${errors.phone ? 'input-error' : ''}`}
-                                        placeholder="+998901234567"
-                                        value={editFormData.phone}
-                                        onChange={(e) => setEditFormData({ ...editFormData, phone: e.target.value })}
-                                    />
-                                    {errors.phone && <p className="text-error text-xs mt-1">{errors.phone}</p>}
-                                </div>
+
                                 <div>
                                     <label className="block text-sm font-medium text-base-350 dark:text-gray-200 mb-1" htmlFor="edit-description">
                                         Description

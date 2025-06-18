@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { SiGooglemaps } from 'react-icons/si';
-import { MdOutlineLocalPhone } from 'react-icons/md';
-import { FaTrash } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { GiReceiveMoney } from 'react-icons/gi';
 
 const AllShops = () => {
     const [shops, setShops] = useState([]);
@@ -23,7 +22,7 @@ const AllShops = () => {
 
             setFetchLoading(true);
             try {
-                const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/shops`, {
+                const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/shops/myshops`, {
                     headers: {
                         'Content-Type': 'application/json',
                         Authorization: `Bearer ${token}`,
@@ -73,13 +72,13 @@ const AllShops = () => {
     return (
         <div className="p-6">
             <div className="flex justify-between mb-3">
-                <h1 className="font-semibold text-2xl mb-4">All Shops</h1>
+                <h1 className="font-semibold text-2xl mb-4">My Shops</h1>
             </div>
             <hr className="mb-6 border-base-300" />
 
             {fetchLoading ? (
                 <div className="flex flex-wrap gap-6">
-                    {[...Array(3)].map((_, i) => (
+                    {[...Array(4)].map((_, i) => (
                         <div key={i} className="skeleton h-[260px] w-[390px] mt-3"></div>
                     ))}
                 </div>
@@ -90,7 +89,7 @@ const AllShops = () => {
                     {shops.map((shop, index) => (
                         <div
                             key={shop._id || index}
-                            className="card bg-base-100 shadow-xl w-[390px] h-[260px] cursor-pointer hover:shadow-2xl transition-shadow relative"
+                            className="card bg-base-100 shadow-xl w-[390px] h-[260px] cursor-pointer hover:shadow-2xl transition-shadow relative border border-base-300"
                             onClick={() => handleShopClick(shop._id)}
                         >
                             <div className="card-body flex flex-row items-center gap-4">
@@ -105,9 +104,9 @@ const AllShops = () => {
                                         <SiGooglemaps className="mr-1 mt-2" />
                                         {shop.address || 'Tashkent, Uzbekistan'}
                                     </p>
-                                    <p className="text-sm text-gray-500 flex mt-2">
-                                        <MdOutlineLocalPhone className="mr-1 mt-1" />
-                                        {shop.phone || '+998901234567'}
+                                    <p className={`text-sm flex mt-2 bg-transparent rounded px-1 ${shop.TariffPlan === 'premium' ? 'bg-gradient-to-r from-blue-600 to-orange-900' : shop.TariffPlan === 'standard' ? 'bg-gradient-to-r from-sky-950 to-cyan-400' : 'bg-gradient-to-tr from-orange-300 to-blue-900'} bg-clip-text text-transparent`}>
+                                        <GiReceiveMoney className={`mr-1 mt-1 size-3  ${shop.TariffPlan === 'premium' ? 'text-blue-600' : shop.TariffPlan === 'standard' ? 'text-cyan-400' : 'text-orange-300'}`} />
+                                        {shop.TariffPlan || 'basic'}
                                     </p>
                                 </div>
                             </div>
