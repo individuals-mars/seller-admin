@@ -59,7 +59,7 @@ const Products = () => {
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-2xl font-semibold">Mening Mahsulotlarim</h1>
         <button
-          onClick={() => navigate('/product/create')}
+          onClick={() => navigate('/createproduct')}
           className="btn btn-primary"
         >
           + Yangi mahsulot
